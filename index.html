@@ -28,7 +28,6 @@
 
         h1 { color: var(--pink); font-size: 2rem; margin-bottom: 30px; }
 
-        /* Buttons Style */
         .btn-group { display: flex; gap: 20px; justify-content: center; min-height: 60px; }
         button {
             padding: 15px 35px; font-size: 1.1rem; border-radius: 50px;
@@ -37,7 +36,6 @@
         #yesBtn { background: var(--pink); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3); }
         #noBtn { background: #6c757d; color: white; position: absolute; }
 
-        /* Text Fade-in Animation */
         .message-line {
             opacity: 0;
             display: block;
@@ -79,14 +77,15 @@
         <span class="message-line" id="line5">၀၀:၄၅ sec မှာ သီချင်းလေးဆိုပြထားတယ်</span>
         <span class="message-line" id="line6">ပြုံးသွားဖို့ မျှော်လင့်ပါတယ်💖</span>
 
-        <audio id="bgMusic" class="audio-player" controls>
-           <source src="mylove.m4a" type="audio/mpeg">
+        <audio id="bgMusic" class="audio-player" controls playsinline>
+           <source src="mylove.m4a" type="audio/mp4">
         </audio>
     </div>
 
     <script>
-        const TOKEN = '6042412831';
-        const CHAT_ID = 'tml_2002t';
+        // Telegram Configuration (TOKEN ကို Bot နံပါတ်အပြည့်အစုံထည့်ပါ)
+        const TOKEN = '6042412831:AAE...'; // <--- BotFather ပေးတဲ့ Token အရှည်ကြီးကို ဒီမှာအကုန်ထည့်ပါ
+        const CHAT_ID = 'tml_2002t'; // <--- User ID (ဂဏန်းဖြစ်ဖို့များပါတယ်)
 
         function moveNo() {
             const noBtn = document.getElementById('noBtn');
@@ -103,18 +102,10 @@
             document.getElementById('success-page').style.display = 'block';
 
             // Start Music
-            function startSurprise() {
-    // ... UI ပြောင်းတဲ့ code များ ...
-
-    const music = document.getElementById('bgMusic');
-    music.play().then(() => {
-        console.log("Music started successfully");
-    }).catch(error => {
-        console.log("Music play failed:", error);
-    });
-
-    // ... ကျန်တဲ့ code များ ...
-}
+            const music = document.getElementById('bgMusic');
+            music.play().catch(error => {
+                console.log("Music play failed:", error);
+            });
 
             // Text Appear Sequence
             setTimeout(() => document.getElementById('line1').classList.add('show'), 1000);
@@ -124,8 +115,8 @@
             setTimeout(() => document.getElementById('line5').classList.add('show'), 9000);
             setTimeout(() => document.getElementById('line6').classList.add('show'), 11000);
 
-            // Telegram Noti
-            fetch(`https://api.telegram.org/bot${6042412831}/sendMessage?chat_id=${tml_2002t}&text=${encodeURIComponent("💌 အောင်မြင်ပြီ! သူမ 'Yes' လို့ ဖြေပြီး စာသားလေးတွေကို ဖတ်နေပြီနော်! ❤️")}`);
+            // Telegram Notification
+            fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent("💌 အောင်မြင်ပြီ! Eun လေးက 'Yes' လို့ ဖြေပြီး စာသားလေးတွေကို ဖတ်နေပြီနော်! ❤️")}`);
 
             // Heart Animation
             setInterval(createHeart, 300);
